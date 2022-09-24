@@ -1,0 +1,43 @@
+.header {
+  height: 14vh;
+  width: 100vw;
+  background-color: #000000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(rgba(34, 0, 255, 0.5), rgba(255, 255, 255, 0.2)),
+    url('../assets/images/laptop-g037b78354_1920.jpg') center top no-repeat;
+  background-size: cover;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  text-align: center;
+}
+
+.title {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 3rem;
+  color: #ffffff;
+  text-shadow: 0 0 20px #ffffff;
+}
+
+@media screen and (min-width: 1367px) {
+  .title {
+    font-size: 4rem;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .title {
+    font-size: 2rem;
+  }
+}
+
+@media screen and (max-width: 414px) {
+  .header {
+    height: 30vh;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+}
