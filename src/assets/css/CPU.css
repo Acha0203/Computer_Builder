@@ -1,8 +1,7 @@
 .heading {
   font-family: 'Montserrat', sans-serif;
   font-size: 1.5rem;
-  color: #ffffff;
-  margin-left: 2rem;
+  color: #fff;
 }
 
 @media screen and (max-width: 414px) {

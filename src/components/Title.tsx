@@ -1,5 +1,3 @@
-import './Title.css';
-
 const Title = () => {
   return (
     <div className="header">

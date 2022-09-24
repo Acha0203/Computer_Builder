@@ -1,12 +1,12 @@
 .header {
   height: 14vh;
   width: 100vw;
-  background-color: #000000;
+  background-color: #000;
   display: flex;
   justify-content: center;
   align-items: center;
   background: linear-gradient(rgba(34, 0, 255, 0.5), rgba(255, 255, 255, 0.2)),
-    url('../assets/images/laptop-g037b78354_1920.jpg') center top no-repeat;
+    url('../images/laptop-g037b78354_1920.jpg') center top no-repeat;
   background-size: cover;
   padding-left: 1rem;
   padding-right: 1rem;
@@ -16,8 +16,8 @@
 .title {
   font-family: 'Libre Baskerville', serif;
   font-size: 3rem;
-  color: #ffffff;
-  text-shadow: 0 0 20px #ffffff;
+  color: #fff;
+  text-shadow: 0 0 20px #fff;
 }
 
 @media screen and (min-width: 1367px) {
