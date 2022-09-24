@@ -6,27 +6,27 @@ import { CustomSelect } from './customStyle';
 import { useAppContext } from '../context/AppContext';
 import { CPUData } from '../types';
 
-const CPU = () => {
+const GPU = () => {
   const [brandList, setBrandList] = useState<string[]>([]);
   const [modelList, setModelList] = useState<string[]>([]);
-  const [cpuList, setCpuList] = useState<CPUData[]>([]);
-  const { cpuBrand, setCpuBrand, cpuModel, setCpuModel } = useAppContext();
+  const [gpuList, setGpuList] = useState<CPUData[]>([]);
+  const { gpuBrand, setGpuBrand, gpuModel, setGpuModel } = useAppContext();
 
   const handleBrandChange = (event: { target: { value: string } }) => {
-    setCpuBrand(event.target.value as string);
-    createModelList(event.target.value, cpuList);
+    setGpuBrand(event.target.value as string);
+    createModelList(event.target.value, gpuList);
   };
 
   const handleModelChange = (event: { target: { value: string } }) => {
-    setCpuModel(event.target.value as string);
+    setGpuModel(event.target.value as string);
   };
 
-  const createCpuList = (items: never[]): void => {
+  const createGpuList = (items: never[]): void => {
     let tempList: CPUData[] = [];
 
     for (const item of items) {
       let tempData: CPUData = {
-        type: 'CPU',
+        type: 'GPU',
         partNumber: '',
         brand: '',
         model: '',
@@ -43,7 +43,7 @@ const CPU = () => {
 
       tempList.push(tempData);
     }
-    setCpuList(tempList);
+    setGpuList(tempList);
   };
 
   const createBrandList = (items: never[]): void => {
@@ -57,12 +57,12 @@ const CPU = () => {
     setBrandList(array);
   };
 
-  const createModelList = (brand: string, cpuList: CPUData[]): void => {
+  const createModelList = (brand: string, gpuList: CPUData[]): void => {
     let tempList: string[] = [];
 
-    for (const cpuData of cpuList) {
-      if (cpuData.brand === brand) {
-        tempList.push(cpuData.model);
+    for (const gpuData of gpuList) {
+      if (gpuData.brand === brand) {
+        tempList.push(gpuData.model);
       }
     }
 
@@ -71,19 +71,19 @@ const CPU = () => {
 
   useEffect(() => {
     let abortCtrl = new AbortController();
-    const fetchCpuData = async () => {
+    const fetchGpuData = async () => {
       try {
         const response = await axios.get(
-          'https://api.recursionist.io/builder/computers?type=cpu'
+          'https://api.recursionist.io/builder/computers?type=gpu'
         );
-        createCpuList(response.data);
+        createGpuList(response.data);
         createBrandList(response.data);
       } catch (error) {
         console.log(error);
       }
     };
 
-    fetchCpuData();
+    fetchGpuData();
 
     return () => {
       abortCtrl.abort();
@@ -101,8 +101,8 @@ const CPU = () => {
         textAlign: 'center',
       }}
     >
-      <h2 className="heading">step1: Select your CPU</h2>
-      <hr className="line1" />
+      <h2 className="heading">step2: Select your GPU</h2>
+      <hr className="line2" />
       <Box
         sx={{
           display: 'flex',
@@ -117,36 +117,36 @@ const CPU = () => {
         }}
       >
         <FormControl sx={{ marginTop: 2, marginX: 3 }} variant="standard">
-          <InputLabel htmlFor="cpu-brand-select-label">Brand</InputLabel>
+          <InputLabel htmlFor="gpu-brand-select-label">Brand</InputLabel>
           <NativeSelect
-            id="cpu-brand-select-label"
-            value={cpuBrand}
+            id="gpu-brand-select-label"
+            value={gpuBrand}
             onChange={handleBrandChange}
             input={<CustomSelect />}
           >
             <option value="">Brand</option>
-            {brandList.map((cpuBrand, index) => {
+            {brandList.map((gpuBrand, index) => {
               return (
-                <option value={cpuBrand} key={index}>
-                  {cpuBrand}
+                <option value={gpuBrand} key={index}>
+                  {gpuBrand}
                 </option>
               );
             })}
           </NativeSelect>
         </FormControl>
         <FormControl sx={{ marginTop: 2, marginX: 3 }} variant="standard">
-          <InputLabel htmlFor="cpu-model-select-label">Model</InputLabel>
+          <InputLabel htmlFor="gpu-model-select-label">Model</InputLabel>
           <NativeSelect
-            id="cpu-model-select-label"
-            value={cpuModel}
+            id="gpu-model-select-label"
+            value={gpuModel}
             onChange={handleModelChange}
             input={<CustomSelect />}
           >
             <option value="">Model</option>
-            {modelList.map((cpuModel, index) => {
+            {modelList.map((gpuModel, index) => {
               return (
-                <option value={cpuModel} key={index}>
-                  {cpuModel}
+                <option value={gpuModel} key={index}>
+                  {gpuModel}
                 </option>
               );
             })}
@@ -157,4 +157,4 @@ const CPU = () => {
   );
 };
 
-export default CPU;
+export default GPU;

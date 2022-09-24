@@ -6,3 +6,4 @@ export type CPUData = {
   rank: number;
   benchmark: number;
 };
+

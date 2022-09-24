@@ -2,6 +2,22 @@
   font-family: 'Montserrat', sans-serif;
   font-size: 1.5rem;
   color: #fff;
+  text-shadow: #fff 1px 1px 10px;
+  padding-bottom: 5px;
+}
+
+.line1 {
+  size: 1px;
+  color: #005afff5;
+  width: 100%;
+  box-shadow: 0 0 10px 10px #00aeff35;
+}
+
+.line2 {
+  size: 1px;
+  color: #0000fff5;
+  width: 100%;
+  box-shadow: 0 0 10px 10px #b0b0ff28;
 }
 
 @media screen and (max-width: 414px) {

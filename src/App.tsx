@@ -1,12 +1,15 @@
 import React from 'react';
 import Layout from './components/Layout';
+import { AppContextProvider } from './context/AppContext';
 
-function App() {
+const App = () => {
   return (
-      <div className="wrapper">
+    <div className="wrapper">
+      <AppContextProvider>
         <Layout />
-      </div>
+      </AppContextProvider>
+    </div>
   );
-}
+};
 
 export default App;

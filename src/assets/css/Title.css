@@ -1,5 +1,5 @@
 .header {
-  height: 14vh;
+  height: 10vh;
   width: 100vw;
   background-color: #000;
   display: flex;
@@ -15,14 +15,14 @@
 
 .title {
   font-family: 'Libre Baskerville', serif;
-  font-size: 3rem;
+  font-size: 2.5rem;
   color: #fff;
   text-shadow: 0 0 20px #fff;
 }
 
 @media screen and (min-width: 1367px) {
   .title {
-    font-size: 4rem;
+    font-size: 2.7rem;
   }
 }
 

@@ -8,7 +8,7 @@ export const CustomSelect = styled(InputBase)(({ theme }) => ({
   '& .MuiInputBase-input': {
     borderRadius: 4,
     position: 'relative',
-    width: '100%',
+    width: '25vw',
     '@media screen and (max-width: 414px)': {
       width: '70vw',
     },

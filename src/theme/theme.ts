@@ -12,7 +12,7 @@ const theme = createTheme({
             color: 'white',
             boxSizing: 'content-box',
             fontFamily: 'Montserrat, sans-serif',
-            backgroundColor: '#E3E3E3',
+            backgroundColor: '#000',
           },
         },
       },
