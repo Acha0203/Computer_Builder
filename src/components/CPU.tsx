@@ -4,12 +4,12 @@ import axios from 'axios';
 import { FormControl, InputLabel, NativeSelect } from '@mui/material';
 import { CustomSelect } from './customStyle';
 import { useAppContext } from '../context/AppContext';
-import { CPUData } from '../types';
+import { PCData } from '../types';
 
 const CPU = () => {
   const [brandList, setBrandList] = useState<string[]>([]);
   const [modelList, setModelList] = useState<string[]>([]);
-  const [cpuList, setCpuList] = useState<CPUData[]>([]);
+  const [cpuList, setCpuList] = useState<PCData[]>([]);
   const { cpuBrand, setCpuBrand, cpuModel, setCpuModel } = useAppContext();
 
   const handleBrandChange = (event: { target: { value: string } }) => {
@@ -22,10 +22,10 @@ const CPU = () => {
   };
 
   const createCpuList = (items: never[]): void => {
-    let tempList: CPUData[] = [];
+    let tempList: PCData[] = [];
 
     for (const item of items) {
-      let tempData: CPUData = {
+      let tempData: PCData = {
         type: 'CPU',
         partNumber: '',
         brand: '',
@@ -57,7 +57,7 @@ const CPU = () => {
     setBrandList(array);
   };
 
-  const createModelList = (brand: string, cpuList: CPUData[]): void => {
+  const createModelList = (brand: string, cpuList: PCData[]): void => {
     let tempList: string[] = [];
 
     for (const cpuData of cpuList) {

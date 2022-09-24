@@ -20,6 +20,13 @@
   box-shadow: 0 0 10px 10px #b0b0ff28;
 }
 
+.line3 {
+  size: 1px;
+  color: #8c00ff84;
+  width: 100%;
+  box-shadow: 0 0 10px 10px #b000ff28;
+}
+
 @media screen and (max-width: 414px) {
   .heading {
     font-size: 1rem;

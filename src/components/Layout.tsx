@@ -2,6 +2,7 @@ import React from 'react';
 import Title from './Title';
 import CPU from './CPU';
 import GPU from './GPU';
+import MemoryCard from './MemoryCard';
 
 const Layout = () => {
   return (
@@ -9,6 +10,7 @@ const Layout = () => {
       <Title />
       <CPU />
       <GPU />
+      <MemoryCard />
     </>
   );
 };

@@ -4,12 +4,12 @@ import axios from 'axios';
 import { FormControl, InputLabel, NativeSelect } from '@mui/material';
 import { CustomSelect } from './customStyle';
 import { useAppContext } from '../context/AppContext';
-import { CPUData } from '../types';
+import { PCData } from '../types';
 
 const GPU = () => {
   const [brandList, setBrandList] = useState<string[]>([]);
   const [modelList, setModelList] = useState<string[]>([]);
-  const [gpuList, setGpuList] = useState<CPUData[]>([]);
+  const [gpuList, setGpuList] = useState<PCData[]>([]);
   const { gpuBrand, setGpuBrand, gpuModel, setGpuModel } = useAppContext();
 
   const handleBrandChange = (event: { target: { value: string } }) => {
@@ -22,10 +22,10 @@ const GPU = () => {
   };
 
   const createGpuList = (items: never[]): void => {
-    let tempList: CPUData[] = [];
+    let tempList: PCData[] = [];
 
     for (const item of items) {
-      let tempData: CPUData = {
+      let tempData: PCData = {
         type: 'GPU',
         partNumber: '',
         brand: '',
@@ -57,7 +57,7 @@ const GPU = () => {
     setBrandList(array);
   };
 
-  const createModelList = (brand: string, gpuList: CPUData[]): void => {
+  const createModelList = (brand: string, gpuList: PCData[]): void => {
     let tempList: string[] = [];
 
     for (const gpuData of gpuList) {
