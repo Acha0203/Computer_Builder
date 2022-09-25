@@ -12,7 +12,7 @@ export const CustomSelect = styled(InputBase)(({ theme }) => ({
     '@media screen and (max-width: 414px)': {
       width: '70vw',
     },
-    color: '#fff',
+    color: '#aaa',
     backgroundColor: '#000',
     border: '1px solid #ced4da',
     fontSize: 16,
@@ -34,12 +34,12 @@ export const CustomSelect = styled(InputBase)(({ theme }) => ({
     '&:focus': {
       borderRadius: 4,
       borderColor: '#80bdff',
-      color: '#fff',
+      color: '#aaa',
       backgroundColor: '#000',
       boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)',
     },
   },
   '& .MuiNativeSelect-icon': {
-    fill: '#fff',
+    fill: '#aaa',
   },
 }));

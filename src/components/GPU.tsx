@@ -5,7 +5,7 @@ import { FormControl, InputLabel, NativeSelect } from '@mui/material';
 import { CustomSelect } from './customStyle';
 import { useAppContext } from '../context/AppContext';
 import { PCData } from '../types';
-import { createBrandList, createList } from '../hooks';
+import { createBrandList, createList, createModelList } from '../hooks';
 
 const GPU = () => {
   const [brandList, setBrandList] = useState<string[]>([]);
@@ -15,23 +15,11 @@ const GPU = () => {
 
   const handleBrandChange = (event: { target: { value: string } }) => {
     setGpuBrand(event.target.value as string);
-    createModelList(event.target.value, gpuList);
+    setModelList(createModelList('', event.target.value, gpuList));
   };
 
   const handleModelChange = (event: { target: { value: string } }) => {
     setGpuModel(event.target.value as string);
-  };
-
-  const createModelList = (brand: string, gpuList: PCData[]): void => {
-    let tempList: string[] = [];
-
-    for (const gpuData of gpuList) {
-      if (gpuData.brand === brand) {
-        tempList.push(gpuData.model);
-      }
-    }
-
-    setModelList(tempList);
   };
 
   useEffect(() => {
@@ -62,7 +50,7 @@ const GPU = () => {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        alignItems: 'flex-start',
+        alignItems: 'center',
         paddingTop: 3,
         textAlign: 'left',
         '@media screen and (max-width: 414px)': {
@@ -79,7 +67,7 @@ const GPU = () => {
           display: 'flex',
           flexDirection: 'row',
           justifyContent: 'center',
-          alignItems: 'flex-start',
+          alignItems: 'center',
           '@media screen and (max-width: 414px)': {
             flexDirection: 'column',
             justifyContent: 'center',

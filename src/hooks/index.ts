@@ -67,7 +67,7 @@ export const createBrandList = (pcDataList: PCData[]): string[] => {
 
   let array = [...new Set(tempList)];
 
-  return array.sort();
+  return array.sort(sortModel);
 };
 
 export const createModelList = (
@@ -76,6 +76,8 @@ export const createModelList = (
   pcList: PCData[]
 ): string[] => {
   let tempList: string[] = [];
+  // 重複を取り除く
+  tempList = [...new Set(tempList)];
 
   for (const pcData of pcList) {
     if (capacity !== null && capacity !== '') {
@@ -88,9 +90,6 @@ export const createModelList = (
       }
     }
   }
-
-  // 重複を取り除く
-  tempList = [...new Set(tempList)];
 
   return tempList.sort(sortModel);
 };
@@ -105,9 +104,8 @@ const sortNumBlock = (a: string, b: string) => {
 };
 
 const sortModel = (a: string, b: string) => {
-  a = a.replace(/-\s/g, '');
-  b = b.replace(/-\s/g, '');
-  const sa = a.replace(/(\d+)/g, (m) => m.padStart(30, '0'));
-  const sb = b.replace(/(\d+)/g, (m) => m.padStart(30, '0'));
+  const sa = a.toLowerCase();
+  const sb = b.toLowerCase();
+
   return sa < sb ? -1 : sa > sb ? 1 : 0;
 };

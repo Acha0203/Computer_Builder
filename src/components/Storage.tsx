@@ -79,7 +79,7 @@ const Storage = () => {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        alignItems: 'flex-start',
+        alignItems: 'center',
         paddingTop: 3,
         textAlign: 'left',
         '@media screen and (max-width: 414px)': {
@@ -96,7 +96,7 @@ const Storage = () => {
           display: 'flex',
           flexDirection: 'row',
           justifyContent: 'center',
-          alignItems: 'flex-start',
+          alignItems: 'center',
           '@media screen and (max-width: 414px)': {
             flexDirection: 'column',
             justifyContent: 'center',
@@ -108,7 +108,7 @@ const Storage = () => {
           sx={{
             marginTop: 2,
             marginLeft: 3,
-            width: 150,
+            width: 120,
             '@media screen and (max-width: 414px)': {
               marginLeft: 0,
               width: 'auto',
@@ -133,7 +133,7 @@ const Storage = () => {
           sx={{
             marginTop: 2,
             marginLeft: 3,
-            width: 150,
+            width: 120,
             '@media screen and (max-width: 414px)': {
               marginLeft: 0,
               width: 'auto',
@@ -164,7 +164,7 @@ const Storage = () => {
           sx={{
             marginTop: 2,
             marginLeft: 3,
-            width: 150,
+            width: 120,
             '@media screen and (max-width: 414px)': {
               marginLeft: 0,
               width: 'auto',
@@ -193,8 +193,12 @@ const Storage = () => {
           sx={{
             marginTop: 2,
             marginLeft: 3,
+            '@media screen and (max-width: 600px)': {
+              width: 120,
+            },
             '@media screen and (max-width: 414px)': {
               marginLeft: 0,
+              width: 'auto',
             },
           }}
           variant="standard"

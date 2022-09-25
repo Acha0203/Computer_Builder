@@ -4,6 +4,7 @@ import CPU from './CPU';
 import GPU from './GPU';
 import MemoryCard from './MemoryCard';
 import Storage from './Storage';
+import Result from './Result';
 
 const Layout = () => {
   return (
@@ -13,6 +14,7 @@ const Layout = () => {
       <GPU />
       <MemoryCard />
       <Storage />
+      <Result />
     </>
   );
 };

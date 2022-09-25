@@ -73,7 +73,7 @@ const MemoryCard = () => {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        alignItems: 'flex-start',
+        alignItems: 'center',
         paddingTop: 3,
         textAlign: 'left',
         '@media screen and (max-width: 414px)': {
@@ -90,7 +90,7 @@ const MemoryCard = () => {
           display: 'flex',
           flexDirection: 'row',
           justifyContent: 'center',
-          alignItems: 'flex-start',
+          alignItems: 'center',
           '@media screen and (max-width: 414px)': {
             flexDirection: 'column',
             justifyContent: 'center',

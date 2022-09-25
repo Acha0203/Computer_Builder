@@ -5,7 +5,7 @@ import { FormControl, InputLabel, NativeSelect } from '@mui/material';
 import { CustomSelect } from './customStyle';
 import { useAppContext } from '../context/AppContext';
 import { PCData } from '../types';
-import { createBrandList, createList } from '../hooks';
+import { createBrandList, createList, createModelList } from '../hooks';
 
 const CPU = () => {
   const [brandList, setBrandList] = useState<string[]>([]);
@@ -15,23 +15,11 @@ const CPU = () => {
 
   const handleBrandChange = (event: { target: { value: string } }) => {
     setCpuBrand(event.target.value as string);
-    createModelList(event.target.value, cpuList);
+    setModelList(createModelList('', event.target.value, cpuList));
   };
 
   const handleModelChange = (event: { target: { value: string } }) => {
     setCpuModel(event.target.value as string);
-  };
-
-  const createModelList = (brand: string, cpuList: PCData[]): void => {
-    let tempList: string[] = [];
-
-    for (const cpuData of cpuList) {
-      if (cpuData.brand === brand) {
-        tempList.push(cpuData.model);
-      }
-    }
-
-    setModelList(tempList);
   };
 
   useEffect(() => {
@@ -62,7 +50,7 @@ const CPU = () => {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        alignItems: 'flex-start',
+        alignItems: 'center',
         paddingTop: 3,
         textAlign: 'left',
         '@media screen and (max-width: 414px)': {
@@ -79,7 +67,7 @@ const CPU = () => {
           display: 'flex',
           flexDirection: 'row',
           justifyContent: 'center',
-          alignItems: 'flex-start',
+          alignItems: 'center',
           '@media screen and (max-width: 414px)': {
             flexDirection: 'column',
             justifyContent: 'center',

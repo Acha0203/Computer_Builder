@@ -1,9 +1,21 @@
 .wrapper {
   width: 100vw;
   height: 100vh;
-  min-height: 2000px;
+  min-height: 1100px;
   background-color: #000;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
+}
+
+@media screen and (max-width: 414px) {
+  .wrapper {
+    min-height: 1800px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .wrapper {
+    min-height: 1700px;
+  }
 }
