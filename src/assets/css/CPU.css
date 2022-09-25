@@ -9,21 +9,28 @@
 
 .line1 {
   size: 1px;
+  color: #00ddffa0;
+  width: 100%;
+  box-shadow: 0 0 10px 10px #00aaff39;
+}
+
+.line2 {
+  size: 1px;
   color: #005afff5;
   width: 100%;
   box-shadow: 0 0 10px 10px #00aeff35;
 }
 
-.line2 {
+.line3 {
   size: 1px;
   color: #0000fff5;
   width: 100%;
   box-shadow: 0 0 10px 10px #b0b0ff28;
 }
 
-.line3 {
+.line4 {
   size: 1px;
-  color: #8c00ff84;
+  color: #8c00ffa5;
   width: 100%;
   box-shadow: 0 0 10px 10px #b000ff28;
 }

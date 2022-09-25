@@ -12,47 +12,53 @@ import {
 } from '../hooks';
 import { PCData } from '../types';
 
-const MemoryCard = () => {
+const Storage = () => {
   const [capacityList, setCapacityList] = useState<string[]>([]);
   const [brandList, setBrandList] = useState<string[]>([]);
   const [modelList, setModelList] = useState<string[]>([]);
-  const [memoryCardList, setMemoryCardList] = useState<PCData[]>([]);
+  const [storageList, setStorageList] = useState<PCData[]>([]);
   const {
-    memoryCardCapacity,
-    setMemoryCardCapacity,
-    memoryCardBrand,
-    setMemoryCardBrand,
-    memoryCardModel,
-    setMemoryCardModel,
+    storageType,
+    setStorageType,
+    storageCapacity,
+    setStorageCapacity,
+    storageBrand,
+    setStorageBrand,
+    storageModel,
+    setStorageModel,
   } = useAppContext();
 
+  const handleTypeChange = (event: { target: { value: string } }) => {
+    setStorageType(event.target.value as string);
+  };
+
   const handleCapacityChange = (event: { target: { value: string } }) => {
-    setMemoryCardCapacity(event.target.value as string);
+    setStorageCapacity(event.target.value as string);
     setModelList(
-      createModelList(event.target.value, memoryCardBrand, memoryCardList)
+      createModelList(event.target.value, storageBrand, storageList)
     );
   };
 
   const handleBrandChange = (event: { target: { value: string } }) => {
-    setMemoryCardBrand(event.target.value as string);
+    setStorageBrand(event.target.value as string);
     setModelList(
-      createModelList(memoryCardCapacity, event.target.value, memoryCardList)
+      createModelList(storageCapacity, event.target.value, storageList)
     );
   };
 
   const handleModelChange = (event: { target: { value: string } }) => {
-    setMemoryCardModel(event.target.value as string);
+    setStorageModel(event.target.value as string);
   };
 
   useEffect(() => {
     let abortCtrl = new AbortController();
-    const fetchMemoryCardData = async () => {
+    const fetchStorageData = async () => {
       try {
         const response = await axios.get(
-          'https://api.recursionist.io/builder/computers?type=ram'
+          `https://api.recursionist.io/builder/computers?type=${storageType?.toLowerCase()}`
         );
         const list = createList(response.data);
-        setMemoryCardList(list);
+        setStorageList(list);
         setCapacityList(createCapacityList(list));
         setBrandList(createBrandList(list));
       } catch (error) {
@@ -60,12 +66,12 @@ const MemoryCard = () => {
       }
     };
 
-    fetchMemoryCardData();
+    fetchStorageData();
 
     return () => {
       abortCtrl.abort();
     };
-  }, []);
+  }, [storageType]);
 
   return (
     <Box
@@ -83,8 +89,8 @@ const MemoryCard = () => {
         },
       }}
     >
-      <h2 className="heading">step3: Select your Memory Card</h2>
-      <hr className="line3" />
+      <h2 className="heading">step4: Select your Storage</h2>
+      <hr className="line4" />
       <Box
         sx={{
           display: 'flex',
@@ -110,20 +116,45 @@ const MemoryCard = () => {
           }}
           variant="standard"
         >
-          <InputLabel htmlFor="memory-card-capacity-select-label">
-            How Many?
+          <InputLabel htmlFor="storage-capacity-select-label">
+            HDD or SSD
           </InputLabel>
           <NativeSelect
-            id="memory-card-capacity-select-label"
-            value={memoryCardCapacity}
+            id="storage-capacity-select-label"
+            value={storageType}
+            onChange={handleTypeChange}
+            input={<CustomSelect />}
+          >
+            <option value="HDD">HDD</option>
+            <option value="SSD">SSD</option>
+          </NativeSelect>
+        </FormControl>
+        <FormControl
+          sx={{
+            marginTop: 2,
+            marginLeft: 3,
+            width: 150,
+            '@media screen and (max-width: 414px)': {
+              marginLeft: 0,
+              width: 'auto',
+            },
+          }}
+          variant="standard"
+        >
+          <InputLabel htmlFor="storage-capacity-select-label">
+            Storage
+          </InputLabel>
+          <NativeSelect
+            id="storage-capacity-select-label"
+            value={storageCapacity}
             onChange={handleCapacityChange}
             input={<CustomSelect />}
           >
-            <option value="">How Many?</option>
-            {capacityList.map((memoryCardCapacity, index) => {
+            <option value="">Storage</option>
+            {capacityList.map((storageCapacity, index) => {
               return (
-                <option value={memoryCardCapacity} key={index}>
-                  {memoryCardCapacity}
+                <option value={storageCapacity} key={index}>
+                  {storageCapacity}
                 </option>
               );
             })}
@@ -141,20 +172,18 @@ const MemoryCard = () => {
           }}
           variant="standard"
         >
-          <InputLabel htmlFor="memory-card-brand-select-label">
-            Brand
-          </InputLabel>
+          <InputLabel htmlFor="storage-brand-select-label">Brand</InputLabel>
           <NativeSelect
-            id="memory-card-brand-select-label"
-            value={memoryCardBrand}
+            id="storage-brand-select-label"
+            value={storageBrand}
             onChange={handleBrandChange}
             input={<CustomSelect />}
           >
             <option value="">Brand</option>
-            {brandList.map((memoryCardBrand, index) => {
+            {brandList.map((storageBrand, index) => {
               return (
-                <option value={memoryCardBrand} key={index}>
-                  {memoryCardBrand}
+                <option value={storageBrand} key={index}>
+                  {storageBrand}
                 </option>
               );
             })}
@@ -170,20 +199,18 @@ const MemoryCard = () => {
           }}
           variant="standard"
         >
-          <InputLabel htmlFor="memory-card-model-select-label">
-            Model
-          </InputLabel>
+          <InputLabel htmlFor="storage-model-select-label">Model</InputLabel>
           <NativeSelect
-            id="memory-card-model-select-label"
-            value={memoryCardModel}
+            id="storage-model-select-label"
+            value={storageModel}
             onChange={handleModelChange}
             input={<CustomSelect />}
           >
             <option value="">Model</option>
-            {modelList.map((memoryCardModel, index) => {
+            {modelList.map((storageModel, index) => {
               return (
-                <option value={memoryCardModel} key={index}>
-                  {memoryCardModel}
+                <option value={storageModel} key={index}>
+                  {storageModel}
                 </option>
               );
             })}
@@ -194,4 +221,4 @@ const MemoryCard = () => {
   );
 };
 
-export default MemoryCard;
+export default Storage;

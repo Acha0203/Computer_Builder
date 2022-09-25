@@ -15,6 +15,14 @@ type AppContextValue = {
   setMemoryCardModel(model: string): void;
   memoryCardCapacity: string | null;
   setMemoryCardCapacity(model: string): void;
+  storageType: string | null;
+  setStorageType(model: string): void;
+  storageCapacity: string | null;
+  setStorageCapacity(model: string): void;
+  storageBrand: string | null;
+  setStorageBrand(model: string): void;
+  storageModel: string | null;
+  setStorageModel(model: string): void;
 };
 
 const AppContext = createContext<AppContextValue>({} as AppContextValue);
@@ -31,6 +39,10 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
   const [memoryCardCapacity, setMemoryCardCapacity] = useState('');
   const [memoryCardBrand, setMemoryCardBrand] = useState('');
   const [memoryCardModel, setMemoryCardModel] = useState('');
+  const [storageType, setStorageType] = useState('HDD');
+  const [storageCapacity, setStorageCapacity] = useState('');
+  const [storageBrand, setStorageBrand] = useState('');
+  const [storageModel, setStorageModel] = useState('');
 
   const value = {
     cpuBrand,
@@ -47,6 +59,14 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
     setMemoryCardModel,
     memoryCardCapacity,
     setMemoryCardCapacity,
+    storageType,
+    setStorageType,
+    storageCapacity,
+    setStorageCapacity,
+    storageBrand,
+    setStorageBrand,
+    storageModel,
+    setStorageModel,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
