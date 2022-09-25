@@ -1,6 +1,8 @@
 # Computer Builder
 
-コンピュータサイエンス学習プラットフォーム[Recursion](https://recursionist.io)の課題として作成した自作コンピュータのスペック計算機です。React.js + TypeScriptで開発しました。
+コンピュータサイエンス学習プラットフォーム[Recursion](https://recursionist.io)の課題として作成した自作コンピュータのスペック計算機です。React.js + TypeScript + Material UIで開発しました。
+
+<img width="822" alt="Computer_Builder" src="https://user-images.githubusercontent.com/74553433/192164362-987c3b37-eada-423c-aba0-efa7f9562199.png">
 
 ## URL
 
