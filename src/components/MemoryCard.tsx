@@ -9,7 +9,8 @@ import {
   createCapacityList,
   createList,
   createModelList,
-} from '../hooks';
+  getPCData,
+} from '../util';
 import { PCData } from '../types';
 
 const MemoryCard = () => {
@@ -24,6 +25,7 @@ const MemoryCard = () => {
     setMemoryCardBrand,
     memoryCardModel,
     setMemoryCardModel,
+    setMemoryCardData,
   } = useAppContext();
 
   const handleCapacityChange = (event: { target: { value: string } }) => {
@@ -42,6 +44,7 @@ const MemoryCard = () => {
 
   const handleModelChange = (event: { target: { value: string } }) => {
     setMemoryCardModel(event.target.value as string);
+    setMemoryCardData(getPCData(event.target.value, memoryCardList));
   };
 
   useEffect(() => {

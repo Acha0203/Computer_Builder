@@ -109,3 +109,53 @@ const sortModel = (a: string, b: string) => {
 
   return sa < sb ? -1 : sa > sb ? 1 : 0;
 };
+
+export const calculateGamingPCScore = (
+  cpuBenchmark: number,
+  gpuBenchMark: number,
+  ramBenchmark: number,
+  storageBenchmark: number,
+  storageType: string
+): number => {
+  let storageRate = storageType === 'SSD' ? 0.1 : 0.025;
+
+  return Math.floor(
+    cpuBenchmark * 0.25 +
+      gpuBenchMark * 0.6 +
+      ramBenchmark * 0.125 +
+      storageBenchmark * storageRate
+  );
+};
+
+export const calculateWorkPCScore = (
+  cpuBenchmark: number,
+  gpuBenchMark: number,
+  ramBenchmark: number,
+  storageBenchmark: number
+): number => {
+  return Math.floor(
+    cpuBenchmark * 0.6 +
+      gpuBenchMark * 0.25 +
+      ramBenchmark * 0.1 +
+      storageBenchmark * 0.05
+  );
+};
+
+export const getPCData = (model: string, pcDataList: PCData[]): PCData => {
+  let result: PCData = {
+    type: '',
+    partNumber: '',
+    brand: '',
+    model: '',
+    rank: 0,
+    benchmark: 0,
+    capacity: '',
+  };
+
+  for (const pcData of pcDataList) {
+    if (pcData.model === model) {
+      result = pcData;
+    }
+  }
+  return result;
+};

@@ -9,7 +9,8 @@ import {
   createCapacityList,
   createList,
   createModelList,
-} from '../hooks';
+  getPCData,
+} from '../util';
 import { PCData } from '../types';
 
 const Storage = () => {
@@ -26,6 +27,7 @@ const Storage = () => {
     setStorageBrand,
     storageModel,
     setStorageModel,
+    setStorageData,
   } = useAppContext();
 
   const handleTypeChange = (event: { target: { value: string } }) => {
@@ -48,6 +50,7 @@ const Storage = () => {
 
   const handleModelChange = (event: { target: { value: string } }) => {
     setStorageModel(event.target.value as string);
+    setStorageData(getPCData(event.target.value, storageList));
   };
 
   useEffect(() => {

@@ -5,13 +5,19 @@ import { FormControl, InputLabel, NativeSelect } from '@mui/material';
 import { CustomSelect } from './customStyle';
 import { useAppContext } from '../context/AppContext';
 import { PCData } from '../types';
-import { createBrandList, createList, createModelList } from '../hooks';
+import {
+  createBrandList,
+  createList,
+  createModelList,
+  getPCData,
+} from '../util';
 
 const CPU = () => {
   const [brandList, setBrandList] = useState<string[]>([]);
   const [modelList, setModelList] = useState<string[]>([]);
   const [cpuList, setCpuList] = useState<PCData[]>([]);
-  const { cpuBrand, setCpuBrand, cpuModel, setCpuModel } = useAppContext();
+  const { cpuBrand, setCpuBrand, cpuModel, setCpuModel, setCpuData } =
+    useAppContext();
 
   const handleBrandChange = (event: { target: { value: string } }) => {
     setCpuBrand(event.target.value as string);
@@ -20,6 +26,7 @@ const CPU = () => {
 
   const handleModelChange = (event: { target: { value: string } }) => {
     setCpuModel(event.target.value as string);
+    setCpuData(getPCData(event.target.value, cpuList));
   };
 
   useEffect(() => {

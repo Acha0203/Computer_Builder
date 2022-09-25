@@ -1,18 +1,50 @@
 import { Box, Button } from '@mui/material';
+import { useState } from 'react';
 import { useAppContext } from '../context/AppContext';
+import { calculateGamingPCScore, calculateWorkPCScore } from '../util';
 
 const Result = () => {
+  const [showSpecs, setShowSpecs] = useState(false);
   const {
     cpuBrand,
     cpuModel,
+    cpuData,
     gpuModel,
     gpuBrand,
+    gpuData,
     memoryCardModel,
     memoryCardBrand,
+    memoryCardData,
     storageType,
     storageModel,
     storageBrand,
+    storageData,
+    gamingPCScore,
+    setGamingPCScore,
+    workPCScore,
+    setWorkPCScore,
   } = useAppContext();
+
+  const handleClickButton = () => {
+    setGamingPCScore(
+      calculateGamingPCScore(
+        cpuData.benchmark,
+        gpuData.benchmark,
+        memoryCardData.benchmark,
+        storageData.benchmark,
+        storageData.type
+      )
+    );
+    setWorkPCScore(
+      calculateWorkPCScore(
+        cpuData.benchmark,
+        gpuData.benchmark,
+        memoryCardData.benchmark,
+        storageData.benchmark
+      )
+    );
+    setShowSpecs(true);
+  };
 
   return (
     <Box
@@ -26,7 +58,11 @@ const Result = () => {
         textAlign: 'center',
       }}
     >
-      <Button sx={{ marginY: 2 }} variant="outlined">
+      <Button
+        sx={{ marginY: 2 }}
+        variant="outlined"
+        onClick={handleClickButton}
+      >
         Show Specs of Your PC
       </Button>
       <Box
@@ -43,23 +79,41 @@ const Result = () => {
           textAlign: 'center',
         }}
       >
-        <h2 className="your-pc">
-          CPU: {cpuModel} ({cpuBrand})
-        </h2>
+        {showSpecs ? (
+          <h2 className="your-pc">
+            CPU: {cpuModel} ({cpuBrand})
+          </h2>
+        ) : (
+          <h2 className="your-pc">CPU</h2>
+        )}
         <hr className="line4" />
-        <h2 className="your-pc">
-          GPU: {gpuModel} ({gpuBrand})
-        </h2>
+        {showSpecs ? (
+          <h2 className="your-pc">
+            GPU: {gpuModel} ({gpuBrand})
+          </h2>
+        ) : (
+          <h2 className="your-pc">GPU</h2>
+        )}
         <hr className="line3" />
-        <h2 className="your-pc">
-          RAM: {memoryCardModel} ({memoryCardBrand})
-        </h2>
+        {showSpecs ? (
+          <h2 className="your-pc">
+            RAM: {memoryCardModel} ({memoryCardBrand})
+          </h2>
+        ) : (
+          <h2 className="your-pc">RAM</h2>
+        )}
         <hr className="line2" />
-        <h2 className="your-pc">
-          {storageType}: {storageModel} ({storageBrand})
-        </h2>
+        {showSpecs ? (
+          <h2 className="your-pc">
+            {storageType}: {storageModel} ({storageBrand})
+          </h2>
+        ) : (
+          <h2 className="your-pc">Storage</h2>
+        )}
         <hr className="line1" />
-        <h2 className="your-pc">Gaming: %&nbsp;&nbsp;Work: %</h2>
+        <h2 className="your-pc">
+          Gaming: {gamingPCScore}%&nbsp;&nbsp;Work: {workPCScore}%
+        </h2>
       </Box>
     </Box>
   );

@@ -10,12 +10,12 @@
 
 @media screen and (max-width: 414px) {
   .wrapper {
-    min-height: 1800px;
+    min-height: 1900px;
   }
 }
 
 @media screen and (max-width: 320px) {
   .wrapper {
-    min-height: 1700px;
+    min-height: 1850px;
   }
 }

@@ -5,13 +5,19 @@ import { FormControl, InputLabel, NativeSelect } from '@mui/material';
 import { CustomSelect } from './customStyle';
 import { useAppContext } from '../context/AppContext';
 import { PCData } from '../types';
-import { createBrandList, createList, createModelList } from '../hooks';
+import {
+  createBrandList,
+  createList,
+  createModelList,
+  getPCData,
+} from '../util';
 
 const GPU = () => {
   const [brandList, setBrandList] = useState<string[]>([]);
   const [modelList, setModelList] = useState<string[]>([]);
   const [gpuList, setGpuList] = useState<PCData[]>([]);
-  const { gpuBrand, setGpuBrand, gpuModel, setGpuModel } = useAppContext();
+  const { gpuBrand, setGpuBrand, gpuModel, setGpuModel, setGpuData } =
+    useAppContext();
 
   const handleBrandChange = (event: { target: { value: string } }) => {
     setGpuBrand(event.target.value as string);
@@ -20,6 +26,7 @@ const GPU = () => {
 
   const handleModelChange = (event: { target: { value: string } }) => {
     setGpuModel(event.target.value as string);
+    setGpuData(getPCData(event.target.value, gpuList));
   };
 
   useEffect(() => {
