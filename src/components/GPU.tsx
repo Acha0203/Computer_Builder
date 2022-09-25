@@ -5,6 +5,7 @@ import { FormControl, InputLabel, NativeSelect } from '@mui/material';
 import { CustomSelect } from './customStyle';
 import { useAppContext } from '../context/AppContext';
 import { PCData } from '../types';
+import { createList } from '../hooks';
 
 const GPU = () => {
   const [brandList, setBrandList] = useState<string[]>([]);
@@ -19,31 +20,6 @@ const GPU = () => {
 
   const handleModelChange = (event: { target: { value: string } }) => {
     setGpuModel(event.target.value as string);
-  };
-
-  const createGpuList = (items: never[]): void => {
-    let tempList: PCData[] = [];
-
-    for (const item of items) {
-      let tempData: PCData = {
-        type: 'GPU',
-        partNumber: '',
-        brand: '',
-        model: '',
-        rank: 0,
-        benchmark: 0,
-      };
-
-      tempData.type = item['Type'];
-      tempData.partNumber = item['Part Number'];
-      tempData.brand = item['Brand'];
-      tempData.model = item['Model'];
-      tempData.rank = item['Rank'];
-      tempData.benchmark = item['Benchmark'];
-
-      tempList.push(tempData);
-    }
-    setGpuList(tempList);
   };
 
   const createBrandList = (items: never[]): void => {
@@ -76,7 +52,8 @@ const GPU = () => {
         const response = await axios.get(
           'https://api.recursionist.io/builder/computers?type=gpu'
         );
-        createGpuList(response.data);
+        const list = createList(response.data);
+        setGpuList(list);
         createBrandList(response.data);
       } catch (error) {
         console.log(error);
@@ -96,9 +73,14 @@ const GPU = () => {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        alignItems: 'center',
+        alignItems: 'flex-start',
         paddingTop: 3,
-        textAlign: 'center',
+        textAlign: 'left',
+        '@media screen and (max-width: 414px)': {
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+        },
       }}
     >
       <h2 className="heading">step2: Select your GPU</h2>
@@ -116,7 +98,18 @@ const GPU = () => {
           },
         }}
       >
-        <FormControl sx={{ marginTop: 2, marginX: 3 }} variant="standard">
+        <FormControl
+          sx={{
+            marginTop: 2,
+            marginLeft: 3,
+            width: 150,
+            '@media screen and (max-width: 414px)': {
+              marginLeft: 0,
+              width: 'auto',
+            },
+          }}
+          variant="standard"
+        >
           <InputLabel htmlFor="gpu-brand-select-label">Brand</InputLabel>
           <NativeSelect
             id="gpu-brand-select-label"
@@ -134,7 +127,16 @@ const GPU = () => {
             })}
           </NativeSelect>
         </FormControl>
-        <FormControl sx={{ marginTop: 2, marginX: 3 }} variant="standard">
+        <FormControl
+          sx={{
+            marginTop: 2,
+            marginLeft: 3,
+            '@media screen and (max-width: 414px)': {
+              marginLeft: 0,
+            },
+          }}
+          variant="standard"
+        >
           <InputLabel htmlFor="gpu-model-select-label">Model</InputLabel>
           <NativeSelect
             id="gpu-model-select-label"

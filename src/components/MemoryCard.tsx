@@ -4,13 +4,14 @@ import axios from 'axios';
 import { FormControl, InputLabel, NativeSelect } from '@mui/material';
 import { CustomSelect } from './customStyle';
 import { useAppContext } from '../context/AppContext';
-import { MemoryCadeData } from '../types';
+import { createList } from '../hooks';
+import { PCData } from '../types';
 
 const MemoryCard = () => {
   const [capacityList, setCapacityList] = useState<string[]>([]);
   const [brandList, setBrandList] = useState<string[]>([]);
   const [modelList, setModelList] = useState<string[]>([]);
-  const [memoryCardList, setMemoryCardList] = useState<MemoryCadeData[]>([]);
+  const [memoryCardList, setMemoryCardList] = useState<PCData[]>([]);
   const {
     memoryCardCapacity,
     setMemoryCardCapacity,
@@ -34,36 +35,7 @@ const MemoryCard = () => {
     setMemoryCardModel(event.target.value as string);
   };
 
-  const createMemoryCardList = (items: never[]): void => {
-    let tempList: MemoryCadeData[] = [];
-
-    for (const item of items) {
-      let tempData: MemoryCadeData = {
-        type: 'MemoryCard',
-        partNumber: '',
-        brand: '',
-        model: '',
-        rank: 0,
-        benchmark: 0,
-        capacity: '',
-      };
-
-      tempData.type = item['Type'];
-      tempData.partNumber = item['Part Number'];
-      tempData.brand = item['Brand'];
-      tempData.model = item['Model'];
-      tempData.rank = item['Rank'];
-      tempData.benchmark = item['Benchmark'];
-
-      const words = tempData.model.split(' ');
-      tempData.capacity = words[words.length - 1];
-
-      tempList.push(tempData);
-    }
-    setMemoryCardList(tempList);
-  };
-
-  const createCapacityList = (memoryCardList: MemoryCadeData[]): void => {
+  const createCapacityList = (memoryCardList: PCData[]): void => {
     let tempList: string[] = [];
 
     for (const memoryCard of memoryCardList) {
@@ -88,7 +60,7 @@ const MemoryCard = () => {
   const createModelList = (
     capacity: string | null,
     brand: string | null,
-    memoryCardList: MemoryCadeData[]
+    memoryCardList: PCData[]
   ): void => {
     let tempList: string[] = [];
 
@@ -113,8 +85,9 @@ const MemoryCard = () => {
         const response = await axios.get(
           'https://api.recursionist.io/builder/computers?type=ram'
         );
-        createMemoryCardList(response.data);
-        createCapacityList(memoryCardList);
+        const list = createList(response.data);
+        setMemoryCardList(list);
+        createCapacityList(list);
         createBrandList(response.data);
       } catch (error) {
         console.log(error);
@@ -126,7 +99,7 @@ const MemoryCard = () => {
     return () => {
       abortCtrl.abort();
     };
-  }, [memoryCardList]);
+  }, []);
 
   return (
     <Box
@@ -134,9 +107,14 @@ const MemoryCard = () => {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        alignItems: 'center',
+        alignItems: 'flex-start',
         paddingTop: 3,
-        textAlign: 'center',
+        textAlign: 'left',
+        '@media screen and (max-width: 414px)': {
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+        },
       }}
     >
       <h2 className="heading">step3: Select your Memory Card</h2>
@@ -155,7 +133,15 @@ const MemoryCard = () => {
         }}
       >
         <FormControl
-          sx={{ marginTop: 2, marginX: 3, width: 150 }}
+          sx={{
+            marginTop: 2,
+            marginLeft: 3,
+            width: 150,
+            '@media screen and (max-width: 414px)': {
+              marginLeft: 0,
+              width: 'auto',
+            },
+          }}
           variant="standard"
         >
           <InputLabel htmlFor="memory-card-capacity-select-label">
@@ -177,7 +163,18 @@ const MemoryCard = () => {
             })}
           </NativeSelect>
         </FormControl>
-        <FormControl sx={{ marginTop: 2, marginX: 3 }} variant="standard">
+        <FormControl
+          sx={{
+            marginTop: 2,
+            marginLeft: 3,
+            width: 150,
+            '@media screen and (max-width: 414px)': {
+              marginLeft: 0,
+              width: 'auto',
+            },
+          }}
+          variant="standard"
+        >
           <InputLabel htmlFor="memory-card-brand-select-label">
             Brand
           </InputLabel>
@@ -197,7 +194,16 @@ const MemoryCard = () => {
             })}
           </NativeSelect>
         </FormControl>
-        <FormControl sx={{ marginTop: 2, marginX: 3 }} variant="standard">
+        <FormControl
+          sx={{
+            marginTop: 2,
+            marginLeft: 3,
+            '@media screen and (max-width: 414px)': {
+              marginLeft: 0,
+            },
+          }}
+          variant="standard"
+        >
           <InputLabel htmlFor="memory-card-model-select-label">
             Model
           </InputLabel>
