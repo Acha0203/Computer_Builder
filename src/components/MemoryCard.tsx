@@ -4,7 +4,7 @@ import axios from 'axios';
 import { FormControl, InputLabel, NativeSelect } from '@mui/material';
 import { CustomSelect } from './customStyle';
 import { useAppContext } from '../context/AppContext';
-import { createList } from '../hooks';
+import { createBrandList, createList, createModelList } from '../hooks';
 import { PCData } from '../types';
 
 const MemoryCard = () => {
@@ -23,12 +23,16 @@ const MemoryCard = () => {
 
   const handleCapacityChange = (event: { target: { value: string } }) => {
     setMemoryCardCapacity(event.target.value as string);
-    createModelList(event.target.value, memoryCardBrand, memoryCardList);
+    setModelList(
+      createModelList(event.target.value, memoryCardBrand, memoryCardList)
+    );
   };
 
   const handleBrandChange = (event: { target: { value: string } }) => {
     setMemoryCardBrand(event.target.value as string);
-    createModelList(memoryCardCapacity, event.target.value, memoryCardList);
+    setModelList(
+      createModelList(memoryCardCapacity, event.target.value, memoryCardList)
+    );
   };
 
   const handleModelChange = (event: { target: { value: string } }) => {
@@ -46,38 +50,6 @@ const MemoryCard = () => {
     setCapacityList(array);
   };
 
-  const createBrandList = (items: never[]): void => {
-    let tempList: string[] = [];
-
-    for (const item of items) {
-      tempList.push(item['Brand']);
-    }
-
-    const array = [...new Set(tempList)];
-    setBrandList(array);
-  };
-
-  const createModelList = (
-    capacity: string | null,
-    brand: string | null,
-    memoryCardList: PCData[]
-  ): void => {
-    let tempList: string[] = [];
-
-    for (const memoryCardData of memoryCardList) {
-      if (
-        memoryCardData.brand === brand &&
-        memoryCardData.capacity === capacity &&
-        brand !== null &&
-        capacity !== null
-      ) {
-        tempList.push(memoryCardData.model);
-      }
-    }
-
-    setModelList(tempList);
-  };
-
   useEffect(() => {
     let abortCtrl = new AbortController();
     const fetchMemoryCardData = async () => {
@@ -88,7 +60,7 @@ const MemoryCard = () => {
         const list = createList(response.data);
         setMemoryCardList(list);
         createCapacityList(list);
-        createBrandList(response.data);
+        setBrandList(createBrandList(list));
       } catch (error) {
         console.log(error);
       }

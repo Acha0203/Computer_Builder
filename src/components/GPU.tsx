@@ -5,7 +5,7 @@ import { FormControl, InputLabel, NativeSelect } from '@mui/material';
 import { CustomSelect } from './customStyle';
 import { useAppContext } from '../context/AppContext';
 import { PCData } from '../types';
-import { createList } from '../hooks';
+import { createBrandList, createList } from '../hooks';
 
 const GPU = () => {
   const [brandList, setBrandList] = useState<string[]>([]);
@@ -20,17 +20,6 @@ const GPU = () => {
 
   const handleModelChange = (event: { target: { value: string } }) => {
     setGpuModel(event.target.value as string);
-  };
-
-  const createBrandList = (items: never[]): void => {
-    let tempList: string[] = [];
-
-    for (const item of items) {
-      tempList.push(item['Brand']);
-    }
-
-    const array = [...new Set(tempList)];
-    setBrandList(array);
   };
 
   const createModelList = (brand: string, gpuList: PCData[]): void => {
@@ -54,7 +43,7 @@ const GPU = () => {
         );
         const list = createList(response.data);
         setGpuList(list);
-        createBrandList(response.data);
+        setBrandList(createBrandList(list));
       } catch (error) {
         console.log(error);
       }

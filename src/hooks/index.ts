@@ -30,3 +30,37 @@ export const createList = (items: never[]): PCData[] => {
   }
   return result;
 };
+
+export const createBrandList = (pcDataList: PCData[]): string[] => {
+  let tempList: string[] = [];
+
+  for (const pcData of pcDataList) {
+    tempList.push(pcData.brand);
+  }
+
+  const array = [...new Set(tempList)];
+
+  return array;
+};
+
+export const createModelList = (
+  capacity: string | null,
+  brand: string | null,
+  pcList: PCData[]
+): string[] => {
+  const tempList: string[] = [];
+
+  for (const pcData of pcList) {
+    if (capacity !== null && capacity !== '') {
+      if (pcData.brand === brand && pcData.capacity === capacity) {
+        tempList.push(pcData.model);
+      }
+    } else if (capacity === null || capacity === '') {
+      if (pcData.brand === brand) {
+        tempList.push(pcData.model);
+      }
+    }
+  }
+
+  return tempList;
+};
