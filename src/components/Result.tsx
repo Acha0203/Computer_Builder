@@ -1,9 +1,9 @@
 import { Box, Button } from '@mui/material';
-import { useState } from 'react';
+import { memo, useState } from 'react';
 import { useAppContext } from '../context/AppContext';
 import { calculateGamingPCScore, calculateWorkPCScore } from '../util';
 
-const Result = () => {
+const Result = memo(() => {
   const [showSpecs, setShowSpecs] = useState(false);
   const {
     cpuBrand,
@@ -117,6 +117,6 @@ const Result = () => {
       </Box>
     </Box>
   );
-};
+});
 
 export default Result;

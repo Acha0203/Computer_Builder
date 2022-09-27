@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import axios from 'axios';
 import { FormControl, InputLabel, NativeSelect } from '@mui/material';
@@ -13,7 +13,7 @@ import {
 } from '../util';
 import { PCData } from '../types';
 
-const MemoryCard = () => {
+const MemoryCard = memo(() => {
   const [capacityList, setCapacityList] = useState<string[]>([]);
   const [brandList, setBrandList] = useState<string[]>([]);
   const [modelList, setModelList] = useState<string[]>([]);
@@ -195,6 +195,6 @@ const MemoryCard = () => {
       </Box>
     </Box>
   );
-};
+});
 
 export default MemoryCard;

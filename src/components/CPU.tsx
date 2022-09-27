@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import axios from 'axios';
 import { FormControl, InputLabel, NativeSelect } from '@mui/material';
@@ -12,7 +12,7 @@ import {
   getPCData,
 } from '../util';
 
-const CPU = () => {
+const CPU = memo(() => {
   const [brandList, setBrandList] = useState<string[]>([]);
   const [modelList, setModelList] = useState<string[]>([]);
   const [cpuList, setCpuList] = useState<PCData[]>([]);
@@ -141,6 +141,6 @@ const CPU = () => {
       </Box>
     </Box>
   );
-};
+});
 
 export default CPU;
