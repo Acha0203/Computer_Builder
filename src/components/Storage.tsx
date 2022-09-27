@@ -119,11 +119,11 @@ const Storage = () => {
           }}
           variant="standard"
         >
-          <InputLabel htmlFor="storage-capacity-select-label">
+          <InputLabel htmlFor="storage-type-select-label">
             HDD or SSD
           </InputLabel>
           <NativeSelect
-            id="storage-capacity-select-label"
+            id="storage-type-select-label"
             value={storageType}
             onChange={handleTypeChange}
             input={<CustomSelect />}
