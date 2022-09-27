@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/Computer_Builder/static/css/main.612097fc.css",
-    "main.js": "/Computer_Builder/static/js/main.a89d62ea.js",
+    "main.js": "/Computer_Builder/static/js/main.c7aac861.js",
     "static/js/787.7088673b.chunk.js": "/Computer_Builder/static/js/787.7088673b.chunk.js",
     "static/media/laptop-g037b78354_1920.jpg": "/Computer_Builder/static/media/laptop-g037b78354_1920.243784c73c4319700342.jpg",
     "index.html": "/Computer_Builder/index.html",
     "main.612097fc.css.map": "/Computer_Builder/static/css/main.612097fc.css.map",
-    "main.a89d62ea.js.map": "/Computer_Builder/static/js/main.a89d62ea.js.map",
+    "main.c7aac861.js.map": "/Computer_Builder/static/js/main.c7aac861.js.map",
     "787.7088673b.chunk.js.map": "/Computer_Builder/static/js/787.7088673b.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.612097fc.css",
-    "static/js/main.a89d62ea.js"
+    "static/js/main.c7aac861.js"
   ]
 }
