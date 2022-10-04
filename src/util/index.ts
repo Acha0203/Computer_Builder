@@ -58,11 +58,20 @@ export const createCapacityList = (pcDataList: PCData[]): string[] => {
   return gbList.sort().concat(tbList.sort(sortNumBlock));
 };
 
-export const createBrandList = (pcDataList: PCData[]): string[] => {
+export const createBrandList = (
+  capacity: string | null,
+  pcDataList: PCData[]
+): string[] => {
   let tempList: string[] = [];
 
   for (const pcData of pcDataList) {
-    tempList.push(pcData.brand);
+    if (capacity !== null && capacity !== '') {
+      if (pcData.capacity === capacity) {
+        tempList.push(pcData.brand);
+      }
+    } else {
+      tempList.push(pcData.brand);
+    }
   }
 
   let array = [...new Set(tempList)];
@@ -81,16 +90,25 @@ export const createModelList = (
 
   for (const pcData of pcList) {
     if (capacity !== null && capacity !== '') {
-      if (pcData.brand === brand && pcData.capacity === capacity) {
-        tempList.push(pcData.model);
+      if (pcData.capacity === capacity) {
+        if (brand !== '') {
+          if (pcData.brand === brand) {
+            tempList.push(pcData.model);
+          }
+        } else {
+          tempList.push(pcData.model);
+        }
       }
-    } else if (capacity === null || capacity === '') {
-      if (pcData.brand === brand) {
+    } else {
+      if (brand !== '') {
+        if (pcData.brand === brand) {
+          tempList.push(pcData.model);
+        }
+      } else {
         tempList.push(pcData.model);
       }
     }
   }
-
   return tempList.sort(sortModel);
 };
 

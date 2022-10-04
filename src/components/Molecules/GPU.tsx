@@ -1,15 +1,20 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import axios from 'axios';
 import { useAppContext } from '../../context/AppContext';
-import { createBrandList, createList } from '../../util';
+import { createBrandList, createList, createModelList } from '../../util';
 import BrandSelect from '../atoms/select/BrandSelect';
 import ModelSelect from '../atoms/select/ModelSelect';
 import { BRAND_WIDTH, MODEL_WIDTH } from '../../config';
 
 const GPU = memo(() => {
-  const [brandList, setBrandList] = useState<string[]>([]);
-  const { setGpuList, gpuModelList } = useAppContext();
+  const {
+    gpuBrandList,
+    setGpuBrandList,
+    setGpuList,
+    gpuModelList,
+    setGpuModelList,
+  } = useAppContext();
 
   useEffect(() => {
     let abortCtrl = new AbortController();
@@ -20,7 +25,8 @@ const GPU = memo(() => {
         );
         const list = createList(response.data);
         setGpuList(list);
-        setBrandList(createBrandList(list));
+        setGpuBrandList(createBrandList(null, list));
+        setGpuModelList(createModelList(null, '', list));
       } catch (error) {
         console.log(error);
       }
@@ -31,7 +37,7 @@ const GPU = memo(() => {
     return () => {
       abortCtrl.abort();
     };
-  }, [setGpuList]);
+  }, [setGpuBrandList, setGpuList, setGpuModelList]);
 
   return (
     <Box
@@ -64,7 +70,7 @@ const GPU = memo(() => {
           },
         }}
       >
-        <BrandSelect items={brandList} type={'gpu'} width={BRAND_WIDTH} />
+        <BrandSelect items={gpuBrandList} type={'gpu'} width={BRAND_WIDTH} />
         <ModelSelect items={gpuModelList} type={'gpu'} width={MODEL_WIDTH} />
       </Box>
     </Box>

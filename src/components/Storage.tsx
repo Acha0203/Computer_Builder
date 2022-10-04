@@ -63,7 +63,7 @@ const Storage = memo(() => {
         const list = createList(response.data);
         setStorageList(list);
         setCapacityList(createCapacityList(list));
-        setBrandList(createBrandList(list));
+        setBrandList(createBrandList(null, list));
       } catch (error) {
         console.log(error);
       }

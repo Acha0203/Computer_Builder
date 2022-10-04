@@ -1,22 +1,28 @@
 import { FormControl, InputLabel, NativeSelect } from '@mui/material';
 import { CustomSelect } from '../../customStyle';
-import { memo } from 'react';
+import { memo, useCallback, useEffect, useState } from 'react';
 import { SelectType } from '../../../types';
 import { useAppContext } from '../../../context/AppContext';
 import { createModelList } from '../../../util';
 
 export const BrandSelect = memo((props: SelectType) => {
+  const [brand, setBrand] = useState<string | null>('');
   const { items, type, width } = props;
   const {
+    cpuBrand,
     setCpuBrand,
     setCpuModelList,
     cpuList,
+    gpuBrand,
     setGpuBrand,
     setGpuModelList,
     gpuList,
+    memoryCardBrand,
     setMemoryCardBrand,
     setMemoryCardModelList,
     memoryCardList,
+    memoryCardCapacity,
+    storageBrand,
     setStorageBrand,
     setStorageModelList,
     storageList,
@@ -35,7 +41,11 @@ export const BrandSelect = memo((props: SelectType) => {
       case 'ram':
         setMemoryCardBrand(event.target.value as string);
         setMemoryCardModelList(
-          createModelList('', event.target.value, memoryCardList)
+          createModelList(
+            memoryCardCapacity,
+            event.target.value,
+            memoryCardList
+          )
         );
         break;
       case 'storage':
@@ -46,6 +56,27 @@ export const BrandSelect = memo((props: SelectType) => {
         break;
     }
   };
+
+  const getBrand = useCallback(() => {
+    switch (type) {
+      case 'cpu':
+        setBrand(cpuBrand);
+        break;
+      case 'gpu':
+        setBrand(gpuBrand);
+        break;
+      case 'ram':
+        setBrand(memoryCardBrand);
+        break;
+      case 'storage':
+        setBrand(storageBrand);
+        break;
+    }
+  }, [cpuBrand, gpuBrand, memoryCardBrand, storageBrand, type]);
+
+  useEffect(() => {
+    getBrand();
+  }, [getBrand]);
 
   return (
     <FormControl
@@ -63,6 +94,7 @@ export const BrandSelect = memo((props: SelectType) => {
       <InputLabel htmlFor={`${type}-brand-select-label`}>Brand</InputLabel>
       <NativeSelect
         id={`${type}-brand-select-label`}
+        value={brand}
         onChange={handleBrandChange}
         input={<CustomSelect />}
       >

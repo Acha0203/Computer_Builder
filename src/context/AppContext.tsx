@@ -4,6 +4,8 @@ import { PCData } from '../types';
 type AppContextValue = {
   cpuBrand: string | null;
   setCpuBrand(brand: string): void;
+  cpuBrandList: string[];
+  setCpuBrandList(modelList: string[]): void;
   cpuModel: string | null;
   setCpuModel(model: string): void;
   cpuModelList: string[];
@@ -14,6 +16,8 @@ type AppContextValue = {
   setCpuList(pcList: PCData[]): void;
   gpuBrand: string | null;
   setGpuBrand(brand: string): void;
+  gpuBrandList: string[];
+  setGpuBrandList(modelList: string[]): void;
   gpuModel: string | null;
   setGpuModel(model: string): void;
   gpuModelList: string[];
@@ -24,6 +28,8 @@ type AppContextValue = {
   setGpuList(pcList: PCData[]): void;
   memoryCardBrand: string | null;
   setMemoryCardBrand(brand: string): void;
+  memoryCardBrandList: string[];
+  setMemoryCardBrandList(modelList: string[]): void;
   memoryCardModel: string | null;
   setMemoryCardModel(model: string): void;
   memoryCardModelList: string[];
@@ -40,6 +46,8 @@ type AppContextValue = {
   setStorageCapacity(model: string): void;
   storageBrand: string | null;
   setStorageBrand(model: string): void;
+  storageBrandList: string[];
+  setStorageBrandList(modelList: string[]): void;
   storageModel: string | null;
   setStorageModel(model: string): void;
   storageModelList: string[];
@@ -62,6 +70,7 @@ export const useAppContext = () => {
 
 export const AppContextProvider = ({ children }: { children: ReactNode }) => {
   const [cpuBrand, setCpuBrand] = useState('');
+  const [cpuBrandList, setCpuBrandList] = useState<string[]>([]);
   const [cpuModel, setCpuModel] = useState('');
   const [cpuModelList, setCpuModelList] = useState<string[]>([]);
   const [cpuData, setCpuData] = useState({
@@ -75,6 +84,7 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
   });
   const [cpuList, setCpuList] = useState<PCData[]>([]);
   const [gpuBrand, setGpuBrand] = useState('');
+  const [gpuBrandList, setGpuBrandList] = useState<string[]>([]);
   const [gpuModel, setGpuModel] = useState('');
   const [gpuModelList, setGpuModelList] = useState<string[]>([]);
   const [gpuData, setGpuData] = useState({
@@ -89,6 +99,7 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
   const [gpuList, setGpuList] = useState<PCData[]>([]);
   const [memoryCardCapacity, setMemoryCardCapacity] = useState('');
   const [memoryCardBrand, setMemoryCardBrand] = useState('');
+  const [memoryCardBrandList, setMemoryCardBrandList] = useState<string[]>([]);
   const [memoryCardModel, setMemoryCardModel] = useState('');
   const [memoryCardModelList, setMemoryCardModelList] = useState<string[]>([]);
   const [memoryCardData, setMemoryCardData] = useState({
@@ -104,6 +115,7 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
   const [storageType, setStorageType] = useState('HDD');
   const [storageCapacity, setStorageCapacity] = useState('');
   const [storageBrand, setStorageBrand] = useState('');
+  const [storageBrandList, setStorageBrandList] = useState<string[]>([]);
   const [storageModel, setStorageModel] = useState('');
   const [storageModelList, setStorageModelList] = useState<string[]>([]);
   const [storageData, setStorageData] = useState({
@@ -122,6 +134,8 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
   const value = {
     cpuBrand,
     setCpuBrand,
+    cpuBrandList,
+    setCpuBrandList,
     cpuModel,
     setCpuModel,
     cpuModelList,
@@ -132,6 +146,8 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
     setCpuList,
     gpuBrand,
     setGpuBrand,
+    gpuBrandList,
+    setGpuBrandList,
     gpuModel,
     setGpuModel,
     gpuModelList,
@@ -142,6 +158,8 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
     setGpuList,
     memoryCardBrand,
     setMemoryCardBrand,
+    memoryCardBrandList,
+    setMemoryCardBrandList,
     memoryCardModel,
     setMemoryCardModel,
     memoryCardModelList,
@@ -158,6 +176,8 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
     setStorageCapacity,
     storageBrand,
     setStorageBrand,
+    storageBrandList,
+    setStorageBrandList,
     storageModel,
     setStorageModel,
     storageModelList,

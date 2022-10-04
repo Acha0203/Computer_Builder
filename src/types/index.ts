@@ -13,3 +13,8 @@ export type SelectType = {
   type: string;
   width: number | string;
 };
+
+export type CapacitySelectType = {
+  items: string[];
+  width: number | string;
+};

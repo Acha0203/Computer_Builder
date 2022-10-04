@@ -1,15 +1,20 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import axios from 'axios';
 import { useAppContext } from '../../context/AppContext';
-import { createBrandList, createList } from '../../util';
+import { createBrandList, createList, createModelList } from '../../util';
 import BrandSelect from '../atoms/select/BrandSelect';
 import ModelSelect from '../atoms/select/ModelSelect';
 import { BRAND_WIDTH, MODEL_WIDTH } from '../../config';
 
 const CPU = memo(() => {
-  const [brandList, setBrandList] = useState<string[]>([]);
-  const { cpuModelList, setCpuList } = useAppContext();
+  const {
+    cpuBrandList,
+    setCpuBrandList,
+    cpuModelList,
+    setCpuModelList,
+    setCpuList,
+  } = useAppContext();
 
   useEffect(() => {
     let abortCtrl = new AbortController();
@@ -20,7 +25,8 @@ const CPU = memo(() => {
         );
         const list = createList(response.data);
         setCpuList(list);
-        setBrandList(createBrandList(list));
+        setCpuBrandList(createBrandList(null, list));
+        setCpuModelList(createModelList(null, '', list));
       } catch (error) {
         console.log(error);
       }
@@ -31,7 +37,7 @@ const CPU = memo(() => {
     return () => {
       abortCtrl.abort();
     };
-  }, [setCpuList]);
+  }, [setCpuBrandList, setCpuList, setCpuModelList]);
 
   return (
     <Box
@@ -64,7 +70,7 @@ const CPU = memo(() => {
           },
         }}
       >
-        <BrandSelect items={brandList} type={'cpu'} width={BRAND_WIDTH} />
+        <BrandSelect items={cpuBrandList} type={'cpu'} width={BRAND_WIDTH} />
         <ModelSelect items={cpuModelList} type={'cpu'} width={MODEL_WIDTH} />
       </Box>
     </Box>

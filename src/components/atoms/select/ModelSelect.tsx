@@ -1,41 +1,68 @@
 import { FormControl, InputLabel, NativeSelect } from '@mui/material';
 import { CustomSelect } from '../../customStyle';
 import { memo } from 'react';
-import { SelectType } from '../../../types';
+import { PCData, SelectType } from '../../../types';
 import { useAppContext } from '../../../context/AppContext';
 import { getPCData } from '../../../util';
 
 export const ModelSelect = memo((props: SelectType) => {
   const { items, type, width } = props;
   const {
+    setCpuBrand,
     setCpuModel,
     setCpuData,
     cpuList,
+    setGpuBrand,
     setGpuModel,
     setGpuData,
+    gpuList,
+    setMemoryCardCapacity,
+    setMemoryCardBrand,
     setMemoryCardModel,
     setMemoryCardData,
+    memoryCardList,
+    setStorageBrand,
     setStorageModel,
     setStorageData,
+    storageList,
   } = useAppContext();
 
   const handleModelChange = (event: { target: { value: string } }) => {
+    let tempData: PCData = {
+      type: '',
+      partNumber: '',
+      brand: '',
+      model: '',
+      rank: 0,
+      benchmark: 0,
+      capacity: '',
+    };
+
     switch (type) {
       case 'cpu':
         setCpuModel(event.target.value as string);
-        setCpuData(getPCData(event.target.value, cpuList));
+        tempData = getPCData(event.target.value, cpuList);
+        setCpuData(tempData);
+        setCpuBrand(tempData.brand);
         break;
       case 'gpu':
         setGpuModel(event.target.value as string);
-        setGpuData(getPCData(event.target.value, cpuList));
+        tempData = getPCData(event.target.value, gpuList);
+        setGpuData(tempData);
+        setGpuBrand(tempData.brand);
         break;
       case 'ram':
         setMemoryCardModel(event.target.value as string);
-        setMemoryCardData(getPCData(event.target.value, cpuList));
+        tempData = getPCData(event.target.value, memoryCardList);
+        setMemoryCardData(tempData);
+        setMemoryCardBrand(tempData.brand);
+        setMemoryCardCapacity(tempData.capacity);
         break;
       case 'storage':
         setStorageModel(event.target.value as string);
-        setStorageData(getPCData(event.target.value, cpuList));
+        tempData = getPCData(event.target.value, storageList);
+        setStorageData(tempData);
+        setStorageBrand(tempData.brand);
         break;
     }
   };
