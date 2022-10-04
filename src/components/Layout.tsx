@@ -1,7 +1,7 @@
 import React, { memo, useEffect } from 'react';
 import Title from './Title';
-import CPU from './CPU';
-import GPU from './GPU';
+import CPU from './Molecules/CPU';
+import GPU from './Molecules/GPU';
 import MemoryCard from './MemoryCard';
 import Storage from './Storage';
 import Result from './Result';

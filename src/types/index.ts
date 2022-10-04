@@ -7,3 +7,9 @@ export type PCData = {
   benchmark: number;
   capacity: string;
 };
+
+export type SelectType = {
+  items: string[];
+  type: string;
+  width: number | string;
+};
