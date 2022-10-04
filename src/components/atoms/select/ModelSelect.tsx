@@ -21,6 +21,8 @@ export const ModelSelect = memo((props: SelectType) => {
     setMemoryCardModel,
     setMemoryCardData,
     memoryCardList,
+    setStorageType,
+    setStorageCapacity,
     setStorageBrand,
     setStorageModel,
     setStorageData,
@@ -55,13 +57,15 @@ export const ModelSelect = memo((props: SelectType) => {
         setMemoryCardModel(event.target.value as string);
         tempData = getPCData(event.target.value, memoryCardList);
         setMemoryCardData(tempData);
-        setMemoryCardBrand(tempData.brand);
         setMemoryCardCapacity(tempData.capacity);
+        setMemoryCardBrand(tempData.brand);
         break;
       case 'storage':
         setStorageModel(event.target.value as string);
         tempData = getPCData(event.target.value, storageList);
         setStorageData(tempData);
+        setStorageType(tempData.type);
+        setStorageCapacity(tempData.capacity);
         setStorageBrand(tempData.brand);
         break;
     }

@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import axios from 'axios';
 import { useAppContext } from '../../context/AppContext';
@@ -8,53 +8,60 @@ import {
   createList,
   createModelList,
 } from '../../util';
-import CapacitySelect from '../atoms/select/CapacitySelect';
+import StorageTypeSelect from '../atoms/select/StorageTypeSelect';
+import StorageCapacitySelect from '../atoms/select/StorageCapacitySelect';
+import { MODEL_WIDTH, TYPE_WIDTH } from '../../config';
 import BrandSelect from '../atoms/select/BrandSelect';
 import ModelSelect from '../atoms/select/ModelSelect';
-import { BRAND_WIDTH, MODEL_WIDTH } from '../../config';
 
-const MemoryCard = memo(() => {
-  const [capacityList, setCapacityList] = useState<string[]>([]);
+const Storage = memo(() => {
   const {
-    memoryCardBrand,
-    memoryCardBrandList,
-    setMemoryCardBrandList,
-    memoryCardCapacity,
-    setMemoryCardList,
-    memoryCardModelList,
-    setMemoryCardModelList,
+    storageType,
+    storageCapacity,
+    storageCapacityList,
+    setStorageCapacityList,
+    storageBrand,
+    storageBrandList,
+    setStorageBrandList,
+    storageModelList,
+    setStorageModelList,
+    setStorageList,
   } = useAppContext();
 
   useEffect(() => {
     let abortCtrl = new AbortController();
-    const fetchMemoryCardData = async () => {
+    const fetchStorageData = async () => {
       try {
         const response = await axios.get(
-          'https://api.recursionist.io/builder/computers?type=ram'
+          `https://api.recursionist.io/builder/computers?type=${storageType?.toLowerCase()}`
         );
         const list = createList(response.data);
-        setMemoryCardList(list);
-        setCapacityList(createCapacityList(list));
-        setMemoryCardBrandList(createBrandList(null, memoryCardCapacity, list));
-        setMemoryCardModelList(
-          createModelList(null, memoryCardCapacity, memoryCardBrand, list)
+        setStorageList(list);
+        setStorageCapacityList(createCapacityList(list));
+        setStorageBrandList(
+          createBrandList(storageType, storageCapacity, list)
+        );
+        setStorageModelList(
+          createModelList(storageType, storageCapacity, storageBrand, list)
         );
       } catch (error) {
         console.log(error);
       }
     };
 
-    fetchMemoryCardData();
+    fetchStorageData();
 
     return () => {
       abortCtrl.abort();
     };
   }, [
-    memoryCardBrand,
-    memoryCardCapacity,
-    setMemoryCardBrandList,
-    setMemoryCardList,
-    setMemoryCardModelList,
+    setStorageBrandList,
+    setStorageCapacityList,
+    setStorageList,
+    setStorageModelList,
+    storageBrand,
+    storageCapacity,
+    storageType,
   ]);
 
   return (
@@ -73,8 +80,8 @@ const MemoryCard = memo(() => {
         },
       }}
     >
-      <h2 className="heading">step3: Select your Memory Card</h2>
-      <hr className="line3" />
+      <h2 className="heading">step4: Select your Storage</h2>
+      <hr className="line4" />
       <Box
         sx={{
           display: 'flex',
@@ -88,15 +95,16 @@ const MemoryCard = memo(() => {
           },
         }}
       >
-        <CapacitySelect items={capacityList} width={BRAND_WIDTH} />
+        <StorageTypeSelect width={TYPE_WIDTH} />
+        <StorageCapacitySelect items={storageCapacityList} width={TYPE_WIDTH} />
         <BrandSelect
-          items={memoryCardBrandList}
-          type={'ram'}
-          width={BRAND_WIDTH}
+          items={storageBrandList}
+          type={'storage'}
+          width={TYPE_WIDTH}
         />
         <ModelSelect
-          items={memoryCardModelList}
-          type={'ram'}
+          items={storageModelList}
+          type={'storage'}
           width={MODEL_WIDTH}
         />
       </Box>
@@ -104,4 +112,4 @@ const MemoryCard = memo(() => {
   );
 });
 
-export default MemoryCard;
+export default Storage;

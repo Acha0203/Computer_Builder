@@ -18,3 +18,7 @@ export type CapacitySelectType = {
   items: string[];
   width: number | string;
 };
+
+export type StorageTypeSelectType = {
+  width: number | string;
+};

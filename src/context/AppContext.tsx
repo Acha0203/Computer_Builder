@@ -5,7 +5,7 @@ type AppContextValue = {
   cpuBrand: string | null;
   setCpuBrand(brand: string): void;
   cpuBrandList: string[];
-  setCpuBrandList(modelList: string[]): void;
+  setCpuBrandList(brandList: string[]): void;
   cpuModel: string | null;
   setCpuModel(model: string): void;
   cpuModelList: string[];
@@ -17,7 +17,7 @@ type AppContextValue = {
   gpuBrand: string | null;
   setGpuBrand(brand: string): void;
   gpuBrandList: string[];
-  setGpuBrandList(modelList: string[]): void;
+  setGpuBrandList(brandList: string[]): void;
   gpuModel: string | null;
   setGpuModel(model: string): void;
   gpuModelList: string[];
@@ -29,25 +29,27 @@ type AppContextValue = {
   memoryCardBrand: string | null;
   setMemoryCardBrand(brand: string): void;
   memoryCardBrandList: string[];
-  setMemoryCardBrandList(modelList: string[]): void;
+  setMemoryCardBrandList(brandList: string[]): void;
   memoryCardModel: string | null;
   setMemoryCardModel(model: string): void;
   memoryCardModelList: string[];
   setMemoryCardModelList(modelList: string[]): void;
   memoryCardCapacity: string | null;
-  setMemoryCardCapacity(model: string): void;
+  setMemoryCardCapacity(capacity: string): void;
   memoryCardData: PCData;
   setMemoryCardData(pcData: PCData): void;
   memoryCardList: PCData[];
   setMemoryCardList(pcList: PCData[]): void;
   storageType: string | null;
-  setStorageType(model: string): void;
+  setStorageType(type: string): void;
   storageCapacity: string | null;
-  setStorageCapacity(model: string): void;
+  setStorageCapacity(capacity: string): void;
+  storageCapacityList: string[];
+  setStorageCapacityList(capacityList: string[]): void;
   storageBrand: string | null;
-  setStorageBrand(model: string): void;
+  setStorageBrand(brand: string): void;
   storageBrandList: string[];
-  setStorageBrandList(modelList: string[]): void;
+  setStorageBrandList(brandList: string[]): void;
   storageModel: string | null;
   setStorageModel(model: string): void;
   storageModelList: string[];
@@ -114,6 +116,7 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
   const [memoryCardList, setMemoryCardList] = useState<PCData[]>([]);
   const [storageType, setStorageType] = useState('HDD');
   const [storageCapacity, setStorageCapacity] = useState('');
+  const [storageCapacityList, setStorageCapacityList] = useState<string[]>([]);
   const [storageBrand, setStorageBrand] = useState('');
   const [storageBrandList, setStorageBrandList] = useState<string[]>([]);
   const [storageModel, setStorageModel] = useState('');
@@ -174,6 +177,8 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
     setStorageType,
     storageCapacity,
     setStorageCapacity,
+    storageCapacityList,
+    setStorageCapacityList,
     storageBrand,
     setStorageBrand,
     storageBrandList,

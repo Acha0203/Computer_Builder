@@ -3,7 +3,7 @@ import Title from './Title';
 import CPU from './Molecules/CPU';
 import GPU from './Molecules/GPU';
 import MemoryCard from './Molecules/MemoryCard';
-import Storage from './Storage';
+import Storage from './Molecules/Storage';
 import Result from './Result';
 
 const Layout = memo(() => {

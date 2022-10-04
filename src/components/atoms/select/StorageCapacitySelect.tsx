@@ -5,20 +5,26 @@ import { CapacitySelectType } from '../../../types';
 import { useAppContext } from '../../../context/AppContext';
 import { createModelList } from '../../../util';
 
-export const CapacitySelect = memo((props: CapacitySelectType) => {
+export const StorageCapacitySelect = memo((props: CapacitySelectType) => {
   const { items, width } = props;
   const {
-    memoryCardBrand,
-    memoryCardCapacity,
-    setMemoryCardCapacity,
-    memoryCardList,
-    setMemoryCardModelList,
+    storageType,
+    storageCapacity,
+    storageBrand,
+    setStorageCapacity,
+    storageList,
+    setStorageModelList,
   } = useAppContext();
 
   const handleCapacityChange = (event: { target: { value: string } }) => {
-    setMemoryCardCapacity(event.target.value as string);
-    setMemoryCardModelList(
-      createModelList(null, event.target.value, memoryCardBrand, memoryCardList)
+    setStorageCapacity(event.target.value as string);
+    setStorageModelList(
+      createModelList(
+        storageType,
+        event.target.value,
+        storageBrand,
+        storageList
+      )
     );
   };
 
@@ -36,15 +42,15 @@ export const CapacitySelect = memo((props: CapacitySelectType) => {
       variant="standard"
     >
       <InputLabel htmlFor="memory-card-capacity-select-label">
-        How Many?
+        Storage
       </InputLabel>
       <NativeSelect
         id="memory-card-capacity-select-label"
-        value={memoryCardCapacity}
+        value={storageCapacity}
         onChange={handleCapacityChange}
         input={<CustomSelect />}
       >
-        <option value="">How Many?</option>
+        <option value="">Storage</option>
         {items.map((item, index) => {
           return (
             <option value={item} key={index}>
@@ -57,4 +63,4 @@ export const CapacitySelect = memo((props: CapacitySelectType) => {
   );
 });
 
-export default CapacitySelect;
+export default StorageCapacitySelect;

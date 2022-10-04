@@ -22,6 +22,8 @@ export const BrandSelect = memo((props: SelectType) => {
     setMemoryCardModelList,
     memoryCardList,
     memoryCardCapacity,
+    storageType,
+    storageCapacity,
     storageBrand,
     setStorageBrand,
     setStorageModelList,
@@ -32,16 +34,21 @@ export const BrandSelect = memo((props: SelectType) => {
     switch (type) {
       case 'cpu':
         setCpuBrand(event.target.value as string);
-        setCpuModelList(createModelList('', event.target.value, cpuList));
+        setCpuModelList(
+          createModelList(null, null, event.target.value, cpuList)
+        );
         break;
       case 'gpu':
         setGpuBrand(event.target.value as string);
-        setGpuModelList(createModelList('', event.target.value, gpuList));
+        setGpuModelList(
+          createModelList(null, null, event.target.value, gpuList)
+        );
         break;
       case 'ram':
         setMemoryCardBrand(event.target.value as string);
         setMemoryCardModelList(
           createModelList(
+            null,
             memoryCardCapacity,
             event.target.value,
             memoryCardList
@@ -51,7 +58,12 @@ export const BrandSelect = memo((props: SelectType) => {
       case 'storage':
         setStorageBrand(event.target.value as string);
         setStorageModelList(
-          createModelList('', event.target.value, storageList)
+          createModelList(
+            storageType,
+            storageCapacity,
+            event.target.value,
+            storageList
+          )
         );
         break;
     }

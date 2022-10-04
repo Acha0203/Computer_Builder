@@ -9,6 +9,7 @@ import { BRAND_WIDTH, MODEL_WIDTH } from '../../config';
 
 const CPU = memo(() => {
   const {
+    cpuBrand,
     cpuBrandList,
     setCpuBrandList,
     cpuModelList,
@@ -25,8 +26,8 @@ const CPU = memo(() => {
         );
         const list = createList(response.data);
         setCpuList(list);
-        setCpuBrandList(createBrandList(null, list));
-        setCpuModelList(createModelList(null, '', list));
+        setCpuBrandList(createBrandList(null, null, list));
+        setCpuModelList(createModelList(null, null, cpuBrand, list));
       } catch (error) {
         console.log(error);
       }
@@ -37,7 +38,7 @@ const CPU = memo(() => {
     return () => {
       abortCtrl.abort();
     };
-  }, [setCpuBrandList, setCpuList, setCpuModelList]);
+  }, [cpuBrand, setCpuBrandList, setCpuList, setCpuModelList]);
 
   return (
     <Box

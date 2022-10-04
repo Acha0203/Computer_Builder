@@ -9,6 +9,7 @@ import { BRAND_WIDTH, MODEL_WIDTH } from '../../config';
 
 const GPU = memo(() => {
   const {
+    gpuBrand,
     gpuBrandList,
     setGpuBrandList,
     setGpuList,
@@ -25,8 +26,8 @@ const GPU = memo(() => {
         );
         const list = createList(response.data);
         setGpuList(list);
-        setGpuBrandList(createBrandList(null, list));
-        setGpuModelList(createModelList(null, '', list));
+        setGpuBrandList(createBrandList(null, null, list));
+        setGpuModelList(createModelList(null, null, gpuBrand, list));
       } catch (error) {
         console.log(error);
       }
@@ -37,7 +38,7 @@ const GPU = memo(() => {
     return () => {
       abortCtrl.abort();
     };
-  }, [setGpuBrandList, setGpuList, setGpuModelList]);
+  }, [gpuBrand, setGpuBrandList, setGpuList, setGpuModelList]);
 
   return (
     <Box
