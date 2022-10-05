@@ -1,13 +1,13 @@
 .header {
   height: 10vh;
   width: 100vw;
-  background-color: #000;
   display: flex;
   justify-content: center;
   align-items: center;
   background: linear-gradient(rgba(34, 0, 255, 0.5), rgba(255, 255, 255, 0.2)),
     url('../images/laptop-g037b78354_1920.jpg') center top no-repeat;
   background-size: cover;
+  background-color: #000;
   padding-left: 1rem;
   padding-right: 1rem;
   font-size: 1.8rem;
