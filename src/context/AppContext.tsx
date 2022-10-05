@@ -62,6 +62,8 @@ type AppContextValue = {
   setGamingPCScore(score: number): void;
   workPCScore: number;
   setWorkPCScore(score: number): void;
+  showSpecs: boolean;
+  setShowSpecs(showSpecs: boolean): void;
 };
 
 const AppContext = createContext<AppContextValue>({} as AppContextValue);
@@ -133,6 +135,7 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
   const [storageList, setStorageList] = useState<PCData[]>([]);
   const [gamingPCScore, setGamingPCScore] = useState(0);
   const [workPCScore, setWorkPCScore] = useState(0);
+  const [showSpecs, setShowSpecs] = useState(false);
 
   const value = {
     cpuBrand,
@@ -195,6 +198,8 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
     setGamingPCScore,
     workPCScore,
     setWorkPCScore,
+    showSpecs,
+    setShowSpecs,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

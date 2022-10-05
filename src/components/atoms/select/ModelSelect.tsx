@@ -1,29 +1,34 @@
 import { FormControl, InputLabel, NativeSelect } from '@mui/material';
 import { CustomSelect } from '../../customStyle';
-import { memo } from 'react';
+import { memo, useCallback, useEffect, useState } from 'react';
 import { PCData, SelectType } from '../../../types';
 import { useAppContext } from '../../../context/AppContext';
 import { getPCData } from '../../../util';
 
 export const ModelSelect = memo((props: SelectType) => {
+  const [model, setModel] = useState<string | null>('');
   const { items, type, width } = props;
   const {
     setCpuBrand,
+    cpuModel,
     setCpuModel,
     setCpuData,
     cpuList,
     setGpuBrand,
+    gpuModel,
     setGpuModel,
     setGpuData,
     gpuList,
     setMemoryCardCapacity,
     setMemoryCardBrand,
+    memoryCardModel,
     setMemoryCardModel,
     setMemoryCardData,
     memoryCardList,
     setStorageType,
     setStorageCapacity,
     setStorageBrand,
+    storageModel,
     setStorageModel,
     setStorageData,
     storageList,
@@ -71,6 +76,27 @@ export const ModelSelect = memo((props: SelectType) => {
     }
   };
 
+  const getModel = useCallback(() => {
+    switch (type) {
+      case 'cpu':
+        setModel(cpuModel);
+        break;
+      case 'gpu':
+        setModel(gpuModel);
+        break;
+      case 'ram':
+        setModel(memoryCardModel);
+        break;
+      case 'storage':
+        setModel(storageModel);
+        break;
+    }
+  }, [cpuModel, gpuModel, memoryCardModel, storageModel, type]);
+
+  useEffect(() => {
+    getModel();
+  }, [getModel]);
+
   return (
     <FormControl
       sx={{
@@ -86,6 +112,7 @@ export const ModelSelect = memo((props: SelectType) => {
       <InputLabel htmlFor={`${type}-model-select-label`}>Model</InputLabel>
       <NativeSelect
         id={`${type}-model-select-label`}
+        value={model}
         onChange={handleModelChange}
         input={<CustomSelect />}
       >

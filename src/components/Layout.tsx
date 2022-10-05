@@ -4,7 +4,7 @@ import CPU from './Molecules/CPU';
 import GPU from './Molecules/GPU';
 import MemoryCard from './Molecules/MemoryCard';
 import Storage from './Molecules/Storage';
-import Result from './Result';
+import Result from './Molecules/Result';
 
 const Layout = memo(() => {
   useEffect(() => {
