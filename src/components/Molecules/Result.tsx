@@ -1,50 +1,23 @@
-import { Box, Button } from '@mui/material';
-import { memo, useState } from 'react';
-import { useAppContext } from '../context/AppContext';
-import { calculateGamingPCScore, calculateWorkPCScore } from '../util';
+import { Box } from '@mui/material';
+import { memo } from 'react';
+import { useAppContext } from '../../context/AppContext';
+import PrimaryButton from '../atoms/button/PrimaryButton';
 
 const Result = memo(() => {
-  const [showSpecs, setShowSpecs] = useState(false);
   const {
     cpuBrand,
     cpuModel,
-    cpuData,
     gpuModel,
     gpuBrand,
-    gpuData,
     memoryCardModel,
     memoryCardBrand,
-    memoryCardData,
     storageType,
     storageModel,
     storageBrand,
-    storageData,
     gamingPCScore,
-    setGamingPCScore,
     workPCScore,
-    setWorkPCScore,
+    showSpecs,
   } = useAppContext();
-
-  const handleClickButton = () => {
-    setGamingPCScore(
-      calculateGamingPCScore(
-        cpuData.benchmark,
-        gpuData.benchmark,
-        memoryCardData.benchmark,
-        storageData.benchmark,
-        storageData.type
-      )
-    );
-    setWorkPCScore(
-      calculateWorkPCScore(
-        cpuData.benchmark,
-        gpuData.benchmark,
-        memoryCardData.benchmark,
-        storageData.benchmark
-      )
-    );
-    setShowSpecs(true);
-  };
 
   return (
     <Box
@@ -58,13 +31,7 @@ const Result = memo(() => {
         textAlign: 'center',
       }}
     >
-      <Button
-        sx={{ marginY: 2 }}
-        variant="outlined"
-        onClick={handleClickButton}
-      >
-        Show Specs of Your PC
-      </Button>
+      <PrimaryButton text="Show Specs of Your PC" />
       <Box
         sx={{
           width: '80%',

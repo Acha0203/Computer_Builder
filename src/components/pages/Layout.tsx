@@ -1,10 +1,10 @@
 import React, { memo, useEffect } from 'react';
-import Title from './Title';
-import CPU from './CPU';
-import GPU from './GPU';
-import MemoryCard from './MemoryCard';
-import Storage from './Storage';
-import Result from './Result';
+import Title from '../atoms/header/Title';
+import CPU from '../molecules/CPU';
+import GPU from '../molecules/GPU';
+import MemoryCard from '../molecules/MemoryCard';
+import Storage from '../molecules/Storage';
+import Result from '../molecules/Result';
 
 const Layout = memo(() => {
   useEffect(() => {

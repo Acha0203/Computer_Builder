@@ -55,14 +55,24 @@ export const createCapacityList = (pcDataList: PCData[]): string[] => {
     }
   }
 
-  return gbList.sort().concat(tbList.sort(sortNumBlock));
+  return gbList.sort(sortNumBlock).concat(tbList.sort(sortNumBlock));
 };
 
-export const createBrandList = (pcDataList: PCData[]): string[] => {
+export const createBrandList = (
+  type: string | null,
+  capacity: string | null,
+  pcDataList: PCData[]
+): string[] => {
   let tempList: string[] = [];
 
   for (const pcData of pcDataList) {
-    tempList.push(pcData.brand);
+    if (capacity !== null && capacity !== '') {
+      if (pcData.capacity === capacity) {
+        tempList.push(pcData.brand);
+      }
+    } else {
+      tempList.push(pcData.brand);
+    }
   }
 
   let array = [...new Set(tempList)];
@@ -71,6 +81,7 @@ export const createBrandList = (pcDataList: PCData[]): string[] => {
 };
 
 export const createModelList = (
+  type: string | null,
   capacity: string | null,
   brand: string | null,
   pcList: PCData[]
@@ -80,17 +91,50 @@ export const createModelList = (
   tempList = [...new Set(tempList)];
 
   for (const pcData of pcList) {
-    if (capacity !== null && capacity !== '') {
-      if (pcData.brand === brand && pcData.capacity === capacity) {
-        tempList.push(pcData.model);
+    if (type !== null) {
+      if (pcData.type === type) {
+        if (capacity !== null && capacity !== '') {
+          if (pcData.capacity === capacity) {
+            if (brand !== '') {
+              if (pcData.brand === brand) {
+                tempList.push(pcData.model);
+              }
+            } else {
+              tempList.push(pcData.model);
+            }
+          }
+        } else {
+          if (brand !== '') {
+            if (pcData.brand === brand) {
+              tempList.push(pcData.model);
+            }
+          } else {
+            tempList.push(pcData.model);
+          }
+        }
       }
-    } else if (capacity === null || capacity === '') {
-      if (pcData.brand === brand) {
-        tempList.push(pcData.model);
+    } else {
+      if (capacity !== null && capacity !== '') {
+        if (pcData.capacity === capacity) {
+          if (brand !== '') {
+            if (pcData.brand === brand) {
+              tempList.push(pcData.model);
+            }
+          } else {
+            tempList.push(pcData.model);
+          }
+        }
+      } else {
+        if (brand !== '') {
+          if (pcData.brand === brand) {
+            tempList.push(pcData.model);
+          }
+        } else {
+          tempList.push(pcData.model);
+        }
       }
     }
   }
-
   return tempList.sort(sortModel);
 };
 

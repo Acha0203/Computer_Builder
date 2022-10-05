@@ -5,11 +5,11 @@ const theme = createTheme({
     MuiCssBaseline: {
       styleOverrides: {
         html: {
-          color: 'white',
+          color: '#fff',
           fontFamily: 'Montserrat, sans-serif',
           body: {
             margin: '0',
-            color: 'white',
+            color: '#fff',
             boxSizing: 'content-box',
             fontFamily: 'Montserrat, sans-serif',
             backgroundColor: '#000',
