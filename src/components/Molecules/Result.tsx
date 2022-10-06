@@ -1,9 +1,9 @@
 import { Box } from '@mui/material';
-import { memo } from 'react';
+import { FC, memo } from 'react';
 import { useAppContext } from '../../context/AppContext';
 import PrimaryButton from '../atoms/button/PrimaryButton';
 
-const Result = memo(() => {
+const Result: FC = memo(() => {
   const {
     cpuBrand,
     cpuModel,

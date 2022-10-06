@@ -1,11 +1,11 @@
 import { FormControl, InputLabel, NativeSelect } from '@mui/material';
 import { CustomSelect } from '../../customStyle';
-import { memo, useCallback, useEffect, useState } from 'react';
+import { FC, memo, useCallback, useEffect, useState } from 'react';
 import { PCData, SelectType } from '../../../types';
 import { useAppContext } from '../../../context/AppContext';
 import { getPCData } from '../../../util';
 
-export const ModelSelect = memo((props: SelectType) => {
+export const ModelSelect: FC<SelectType> = memo((props) => {
   const [model, setModel] = useState<string | null>('');
   const { items, type, width } = props;
   const {

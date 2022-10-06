@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, { FC, memo, useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import axios from 'axios';
 import { useAppContext } from '../../context/AppContext';
@@ -13,7 +13,7 @@ import BrandSelect from '../atoms/select/BrandSelect';
 import ModelSelect from '../atoms/select/ModelSelect';
 import { BRAND_WIDTH, MODEL_WIDTH } from '../../config';
 
-const MemoryCard = memo(() => {
+const MemoryCard: FC = memo(() => {
   const [capacityList, setCapacityList] = useState<string[]>([]);
   const {
     memoryCardBrand,

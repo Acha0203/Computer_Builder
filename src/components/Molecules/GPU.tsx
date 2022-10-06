@@ -1,4 +1,4 @@
-import React, { memo, useEffect } from 'react';
+import React, { FC, memo, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import axios from 'axios';
 import { useAppContext } from '../../context/AppContext';
@@ -7,7 +7,7 @@ import BrandSelect from '../atoms/select/BrandSelect';
 import ModelSelect from '../atoms/select/ModelSelect';
 import { BRAND_WIDTH, MODEL_WIDTH } from '../../config';
 
-const GPU = memo(() => {
+const GPU: FC = memo(() => {
   const {
     gpuBrand,
     gpuBrandList,
