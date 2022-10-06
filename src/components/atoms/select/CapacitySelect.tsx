@@ -1,11 +1,11 @@
 import { FormControl, InputLabel, NativeSelect } from '@mui/material';
 import { CustomSelect } from '../../customStyle';
-import { memo } from 'react';
-import { CapacitySelectType } from '../../../types';
+import { FC, memo } from 'react';
+import { SelectType } from '../../../types';
 import { useAppContext } from '../../../context/AppContext';
 import { createModelList } from '../../../util';
 
-export const CapacitySelect = memo((props: CapacitySelectType) => {
+export const CapacitySelect: FC<Omit<SelectType, 'type'>> = memo((props) => {
   const { items, width } = props;
   const {
     memoryCardBrand,

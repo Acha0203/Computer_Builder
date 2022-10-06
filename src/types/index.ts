@@ -14,15 +14,6 @@ export type SelectType = {
   width: number | string;
 };
 
-export type CapacitySelectType = {
-  items: string[];
-  width: number | string;
-};
-
-export type StorageTypeSelectType = {
-  width: number | string;
-};
-
 export type ButtonType = {
   text: string;
-}
+};

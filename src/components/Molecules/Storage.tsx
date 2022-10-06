@@ -1,4 +1,4 @@
-import React, { memo, useEffect } from 'react';
+import React, { FC, memo, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import axios from 'axios';
 import { useAppContext } from '../../context/AppContext';
@@ -14,7 +14,7 @@ import { MODEL_WIDTH, TYPE_WIDTH } from '../../config';
 import BrandSelect from '../atoms/select/BrandSelect';
 import ModelSelect from '../atoms/select/ModelSelect';
 
-const Storage = memo(() => {
+const Storage: FC = memo(() => {
   const {
     storageType,
     storageCapacity,

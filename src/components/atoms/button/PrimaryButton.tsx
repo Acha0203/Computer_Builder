@@ -1,10 +1,10 @@
 import { Button } from '@mui/material';
-import { memo } from 'react';
+import { FC, memo } from 'react';
 import { useAppContext } from '../../../context/AppContext';
 import { ButtonType } from '../../../types';
 import { calculateGamingPCScore, calculateWorkPCScore } from '../../../util';
 
-const PrimaryButton = memo((props: ButtonType) => {
+const PrimaryButton: FC<ButtonType> = memo((props) => {
   const { text } = props;
   const {
     cpuData,
